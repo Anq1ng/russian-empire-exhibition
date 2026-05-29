@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Weight of Empire — Russia 1450–1900</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0e0b08;
+    --ink2:#1a140d;
+    --parch:#e8dcc4;
+    --parch-dim:#c9b896;
+    --gold:#c9a227;
+    --gold-bright:#e8c75a;
+    --crimson:#7a1420;
+    --crimson-bright:#a8273a;
+    --line:rgba(201,162,39,.28);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--parch);
+    font-family:'Spectral',serif;
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* grain overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection{background:var(--crimson);color:var(--gold-bright)}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--crimson-bright));width:0;z-index:300;box-shadow:0 0 12px var(--gold)}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;justify-content:space-between;align-items:center;
+    padding:18px 40px;mix-blend-mode:difference}
+  nav .brand{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.35em;color:#fff;text-transform:uppercase}
+  nav .halls{display:flex;gap:26px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+  nav .halls a{color:#fff;text-decoration:none;opacity:.7;transition:opacity .3s}
+  nav .halls a:hover{opacity:1}
+  @media(max-width:760px){nav .halls{display:none}nav{padding:14px 20px}}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;position:relative;padding:0 24px;
+    background:
+      radial-gradient(ellipse at 50% 30%,rgba(122,20,32,.25),transparent 60%),
+      radial-gradient(ellipse at 50% 80%,rgba(201,162,39,.12),transparent 55%),
+      var(--ink);
+    overflow:hidden}
+  /* double-headed eagle motif via layered shapes */
+  .hero .crest{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:min(90vh,640px);height:min(90vh,640px);opacity:.07;pointer-events:none;
+    background:radial-gradient(circle,var(--gold) 0 1px,transparent 1px) 0 0/30px 30px;
+    -webkit-mask:radial-gradient(circle at center,#000 30%,transparent 70%);
+            mask:radial-gradient(circle at center,#000 30%,transparent 70%)}
+  .hero .ribbon{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.5em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:34px;opacity:0;animation:fade 1.2s .2s forwards}
+  .hero h1{font-family:'Cinzel',serif;font-weight:700;color:var(--parch);
+    font-size:clamp(2.6rem,8vw,6.4rem);line-height:.98;letter-spacing:.02em;
+    text-shadow:0 4px 40px rgba(0,0,0,.6)}
+  .hero h1 .l{display:inline-block;opacity:0;transform:translateY(30px);animation:rise .9s forwards}
+  .hero .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2.6vw,1.7rem);
+    color:var(--parch-dim);margin-top:28px;max-width:680px;opacity:0;animation:fade 1.4s 1s forwards}
+  .hero .dates{margin-top:40px;font-family:'Cinzel',serif;letter-spacing:.4em;font-size:14px;color:var(--gold-bright);
+    opacity:0;animation:fade 1.4s 1.3s forwards}
+  .hero .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;color:var(--parch-dim);opacity:0;
+    animation:fade 2s 1.8s forwards}
+  .hero .scroll-cue::after{content:"";display:block;width:1px;height:40px;margin:12px auto 0;
+    background:linear-gradient(var(--gold),transparent);animation:pulse 2s infinite}
+
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+  @keyframes fade{to{opacity:1}}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+  /* THESIS plaque */
+  .thesis{max-width:880px;margin:0 auto;padding:140px 28px 120px;text-align:center;position:relative}
+  .thesis .markline{width:60px;height:1px;background:var(--gold);margin:0 auto 40px}
+  .thesis p{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.1rem);line-height:1.55;color:var(--parch)}
+  .thesis .em{color:var(--gold-bright);font-style:italic}
+
+  /* HALL sections */
+  .hall{max-width:1180px;margin:0 auto;padding:90px 28px;border-top:1px solid var(--line)}
+  .hall-head{display:flex;align-items:baseline;gap:24px;margin-bottom:48px;flex-wrap:wrap}
+  .hall-num{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.3em;color:var(--crimson-bright);
+    border:1px solid var(--crimson);padding:6px 14px;white-space:nowrap}
+  .hall-title{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(1.8rem,4.5vw,3.2rem);
+    color:var(--parch);line-height:1.05}
+  .hall-period{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.2rem;margin-left:auto}
+
+  .exhibit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:34px}
+  .card{background:linear-gradient(160deg,var(--ink2),var(--ink));border:1px solid var(--line);
+    padding:34px 30px;position:relative;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .5s,box-shadow .5s}
+  .card::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+    background:linear-gradient(90deg,var(--gold),transparent);opacity:.6}
+  .card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+  .card .tag{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;display:block}
+  .card h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.55rem;color:var(--parch);
+    margin-bottom:14px;line-height:1.15}
+  .card p{font-size:1rem;color:var(--parch-dim)}
+  .card .year{position:absolute;bottom:18px;right:22px;font-family:'Cinzel',serif;font-size:2.4rem;
+    color:rgba(201,162,39,.12);font-weight:700;pointer-events:none}
+
+  /* prose block */
+  .prose{max-width:760px;margin:0 auto;font-size:1.18rem;color:var(--parch-dim)}
+  .prose p{margin-bottom:22px}
+  .prose .lead::first-letter{font-family:'Cinzel',serif;font-size:4.2rem;float:left;line-height:.8;
+    padding:6px 14px 0 0;color:var(--gold-bright)}
+  .prose strong{color:var(--parch);font-weight:500}
+
+  /* pull quote */
+  .pull{max-width:980px;margin:100px auto;padding:0 28px;text-align:center}
+  .pull q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.6rem,4vw,2.8rem);
+    color:var(--parch);line-height:1.4;quotes:none}
+  .pull .src{display:block;margin-top:26px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.3em;
+    color:var(--gold);text-transform:uppercase}
+
+  /* timeline rail */
+  .rail{max-width:760px;margin:60px auto 0;position:relative;padding-left:34px}
+  .rail::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;
+    background:linear-gradient(var(--gold),var(--crimson))}
+  .rail .node{position:relative;padding:0 0 36px 24px}
+  .rail .node::before{content:"";position:absolute;left:-34px;top:6px;width:14px;height:14px;border-radius:50%;
+    background:var(--ink);border:2px solid var(--gold);box-shadow:0 0 0 4px var(--ink)}
+  .rail .yr{font-family:'Cinzel',serif;color:var(--gold-bright);font-size:1.1rem;letter-spacing:.1em}
+  .rail .ev{color:var(--parch-dim);font-size:1.02rem;margin-top:4px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
+
+  /* finale */
+  .finale{text-align:center;padding:140px 28px 120px;
+    background:radial-gradient(ellipse at 50% 0%,rgba(122,20,32,.3),transparent 60%),var(--ink);
+    border-top:1px solid var(--line)}
+  .finale .q-label{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase}
+  .finale h2{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(2rem,5.5vw,4rem);color:var(--parch);
+    margin:30px auto 40px;max-width:900px;line-height:1.1}
+  .finale .ans{max-width:720px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-size:1.4rem;
+    font-style:italic;color:var(--parch-dim);line-height:1.6}
+
+  footer{text-align:center;padding:50px 28px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.3em;
+    color:var(--parch-dim);text-transform:uppercase;border-top:1px solid var(--line);opacity:.6}
+
+  /* ===== ARTWORK / PLATES ===== */
+  /* a framed painting "on the wall" */
+  .plate{margin:54px auto 0;max-width:760px}
+  .plate.wide{max-width:980px}
+  .frame{position:relative;padding:14px;background:
+      linear-gradient(135deg,#3a2c14,#6b5320 18%,#caa53d 50%,#6b5320 82%,#3a2c14);
+    box-shadow:0 24px 60px rgba(0,0,0,.6),inset 0 0 0 1px rgba(0,0,0,.4);}
+  .frame::before{content:"";position:absolute;inset:8px;border:2px solid rgba(0,0,0,.45);pointer-events:none;z-index:2}
+  .frame img{display:block;width:100%;height:auto;filter:saturate(.92) contrast(1.02);
+    background:#1a140d}
+  .frame .loading{display:flex;align-items:center;justify-content:center;min-height:180px;
+    font-family:'Cinzel',serif;font-size:11px;letter-spacing:.25em;color:var(--parch-dim);text-transform:uppercase}
+  .plate .placard{margin-top:16px;padding:14px 18px;border-left:2px solid var(--gold);
+    background:linear-gradient(90deg,rgba(201,162,39,.07),transparent)}
+  .plate .placard .pt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--parch)}
+  .plate .placard .pm{display:block;margin-top:4px;font-family:'Cinzel',serif;font-size:10px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+
+  /* side-by-side: text + painting */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1180px;margin:0 auto}
+  .duo .plate{margin:0;max-width:none}
+  @media(max-width:820px){.duo{grid-template-columns:1fr;gap:36px}}
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+<nav>
+  <div class="brand">Imperial Halls</div>
+  <div class="halls">
+    <a href="#hall1">I · Autocracy</a>
+    <a href="#hall2">II · Expansion</a>
+    <a href="#hall3">III · Serfdom</a>
+    <a href="#hall4">IV · Fracture</a>
+    <a href="#hall5">V · Reform</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="crest" style="background:none;-webkit-mask:none;mask:none;display:flex;align-items:center;justify-content:center">
+    <img loading="eager" alt="Coat of arms of the Russian Empire"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Coat%20of%20Arms%20of%20the%20Russian%20Empire.svg?width=600"
+      style="width:100%;height:100%;object-fit:contain;opacity:.5;filter:sepia(1) saturate(2) hue-rotate(5deg) brightness(.9)">
+  </div>
+  <div class="ribbon">A Museum Exhibition · World History</div>
+  <h1 id="heroTitle"></h1>
+  <p class="sub">How the foundations Russia built between 1450 and 1750 — autocracy, conquest, and bondage — became the very forces that fractured the empire in the age of industry and revolution.</p>
+  <div class="dates">1450 — 1900</div>
+  <div class="scroll-cue">Enter the Halls</div>
+</header>
+
+<!-- THESIS -->
+<section class="thesis reveal">
+  <div class="markline"></div>
+  <p>The Russian Empire forged its strength through <span class="em">autocratic rule, relentless expansion, and serfdom</span> — yet each of these foundations carried the seed of the crisis that would force the empire to change after 1750.</p>
+</section>
+
+<!-- HALL 1 -->
+<section class="hall" id="hall1">
+  <div class="hall-head reveal">
+    <span class="hall-num">Hall I</span>
+    <h2 class="hall-title">The Throne Absolute</h2>
+    <span class="hall-period">1450 – 1750</span>
+  </div>
+  <div class="duo reveal d1">
+    <div class="prose" style="font-size:1.1rem">
+      <p class="lead">From Ivan III onward, the Muscovite rulers bent every rival to the throne. The Mongol yoke was thrown off, the independence of princes and boyars dissolved, and authority gathered into a single hand. Ivan IV broke aristocratic resistance through the terror of the <strong>Oprichnina</strong>, and after the chaos of the Time of Troubles the Romanov dynasty restored absolute control.</p>
+      <p>Peter the Great forged a professional state: the <strong>Table of Ranks</strong> of 1722 tied nobility to compulsory service, and the elite were bound ever closer to the crown — a system efficient, unyielding, and built upon serfdom.</p>
+    </div>
+    <figure class="plate">
+      <div class="frame"><img loading="lazy" alt="Ilya Repin, Ivan the Terrible and His Son Ivan (1885)"
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Ilya%20Repin%20-%20Ivan%20the%20Terrible%20and%20His%20Son%20Ivan%20(16%20November%201581)%20-%20Google%20Art%20Project.jpg?width=900"></div>
+      <figcaption class="placard"><span class="pt">Ivan the Terrible and His Son Ivan</span><span class="pm">Ilya Repin · 1885 · Tretyakov Gallery</span></figcaption>
+    </figure>
+  </div>
+  <div class="exhibit-grid" style="margin-top:50px">
+    <div class="card reveal d1"><span class="tag">Foundation</span><h3>The End of the Yoke</h3><p>Ivan III ended Mongol overlordship and absorbed the appanage princes, beginning the gathering of power.</p><span class="year">1480</span></div>
+    <div class="card reveal d2"><span class="tag">Instrument of Fear</span><h3>The Oprichnina</h3><p>Ivan IV used terror and land seizure to shatter boyar independence and bind the nobility to the tsar.</p><span class="year">1565</span></div>
+    <div class="card reveal d3"><span class="tag">The Machine of State</span><h3>Table of Ranks</h3><p>Peter the Great made nobility earn status through state service, building a loyal professional bureaucracy.</p><span class="year">1722</span></div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull reveal"><q>Moscow as the Third Rome — heir to empire, guardian of the Orthodox world.</q><span class="src">The Ideology of Expansion</span></div>
+
+<!-- HALL 2 -->
+<section class="hall" id="hall2">
+  <div class="hall-head reveal">
+    <span class="hall-num">Hall II</span>
+    <h2 class="hall-title">A Borderless Horizon</h2>
+    <span class="hall-period">1450 – 1750</span>
+  </div>
+  <div class="prose reveal d1">
+    <p class="lead">On the open Eurasian steppe — no mountains, no oceans to shelter the realm — security meant ceaseless conquest. Historians call it <strong>defensive aggression</strong>. Ivan IV seized the Khanates of Kazan and Astrakhan, unlocking the Volga and the road east.</p>
+    <p>Cossack pioneers swept across Siberia chasing fur and the <strong>yasak</strong> tribute, reaching the Pacific within a single century. Absolute power made it possible: the tsar could launch campaigns without consent, justified by the dream of Moscow as the Third Rome.</p>
+  </div>
+  <figure class="plate wide reveal d2">
+    <div class="frame"><img loading="lazy" alt="Vasily Surikov, Yermak's Conquest of Siberia (1895)"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Surikov%20Pokoreniye%20Sibiri%20Yermakom.jpg?width=1100"></div>
+    <figcaption class="placard"><span class="pt">Yermak&#x2019;s Conquest of Siberia</span><span class="pm">Vasily Surikov · 1895 · State Russian Museum</span></figcaption>
+  </figure>
+  <div class="exhibit-grid" style="margin-top:50px">
+    <div class="card reveal d1"><span class="tag">Conquest</span><h3>Kazan & Astrakhan</h3><p>Ivan IV's victories opened the Volga and the gateway to Siberia and the East.</p><span class="year">1556</span></div>
+    <div class="card reveal d2"><span class="tag">Reach</span><h3>To the Pacific</h3><p>Cossacks crossed a continent in pursuit of fur wealth, extending the empire to the ocean's edge.</p><span class="year">1640s</span></div>
+    <div class="card reveal d3"><span class="tag">A Window West</span><h3>The Baltic Won</h3><p>The Great Northern War secured the Baltic; St. Petersburg rose as Russia's window to Europe.</p><span class="year">1721</span></div>
+  </div>
+</section>
+
+<!-- HALL 3 -->
+<section class="hall" id="hall3">
+  <div class="hall-head reveal">
+    <span class="hall-num">Hall III</span>
+    <h2 class="hall-title">The Bound Earth</h2>
+    <span class="hall-period">1450 – 1750</span>
+  </div>
+  <div class="duo reveal d1">
+    <figure class="plate">
+      <div class="frame"><img loading="lazy" alt="Grigoriy Myasoyedov, Reading of the 1861 Manifesto (peasants), 1873"
+        src="https://commons.wikimedia.org/wiki/Special:FilePath/Grigoriy%20Myasoyedov%20Reading%20of%20the%201861%20Manifesto%201873.jpg?width=900"></div>
+      <figcaption class="placard"><span class="pt">Russian Peasants</span><span class="pm">The bound class on whom the empire rested</span></figcaption>
+    </figure>
+    <div class="prose" style="font-size:1.1rem">
+      <p class="lead">Empire rested on the backs of the peasantry. The 1497 Sudebnik first chained their movement; the <strong>1649 Sobornoye Ulozhenie</strong> made serfdom hereditary and permanent, criminalizing flight from the land.</p>
+      <p>Peasants gave grain, the poll tax, and soldiers. Nobles received land and serfs in exchange for service — a hierarchy that financed war and conquest, yet tethered the economy to <strong>coercion rather than innovation</strong>.</p>
+    </div>
+  </div>
+  <div class="rail reveal d2">
+    <div class="node"><div class="yr">1497</div><div class="ev">The Sudebnik begins restricting peasant mobility.</div></div>
+    <div class="node"><div class="yr">1649</div><div class="ev">The Sobornoye Ulozhenie binds serfs to the land forever.</div></div>
+    <div class="node"><div class="yr">1700–1721</div><div class="ev">Peasant surplus and conscription fuel the Great Northern War.</div></div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull reveal"><q>The same foundations that raised the empire began, slowly, to crack it.</q><span class="src">The Turning Point · circa 1750</span></div>
+
+<!-- HALL 4 -->
+<section class="hall" id="hall4">
+  <div class="hall-head reveal">
+    <span class="hall-num">Hall IV</span>
+    <h2 class="hall-title">The Fracture</h2>
+    <span class="hall-period">The Problem Emerges</span>
+  </div>
+  <div class="prose reveal d1">
+    <p class="lead">Expansion and serfdom turned from strengths into burdens. Vast distances created <strong>administrative overstretch</strong>; governance from St. Petersburg grew inefficient, leaving arbitrary military governors to rule the frontier.</p>
+    <p>Conquest had made the empire a patchwork of peoples — by the late nineteenth century, ethnic Russians were less than half the population. Meanwhile, because industrialization demanded a free and mobile workforce, serfdom left Russia <strong>falling behind a modernizing Europe</strong>. Pugachev's Rebellion, unrest in Poland, and Enlightenment criticism all gathered force — until defeat in the Crimean War laid the weakness bare.</p>
+  </div>
+  <div class="exhibit-grid" style="margin-top:50px">
+    <div class="card reveal d1"><span class="tag">Internal Strain</span><h3>Pugachev's Rebellion</h3><p>A vast frontier uprising exposed the fragility of order across the empire's distant edges.</p><span class="year">1774</span></div>
+    <div class="card reveal d2"><span class="tag">Falling Behind</span><h3>The Industrial Gap</h3><p>Bound labor could not feed factories. As Europe industrialized, Russia's coerced economy stalled.</p><span class="year">1800s</span></div>
+    <div class="card reveal d3"><span class="tag">The Reckoning</span><h3>The Crimean War</h3><p>Military defeat revealed Russia's technological and organizational backwardness for all to see.</p><span class="year">1856</span></div>
+  </div>
+</section>
+
+<!-- HALL 5 -->
+<section class="hall" id="hall5">
+  <div class="hall-head reveal">
+    <span class="hall-num">Hall V</span>
+    <h2 class="hall-title">The Age of Reform</h2>
+    <span class="hall-period">1750 – 1900</span>
+  </div>
+  <div class="prose reveal d1">
+    <p class="lead">Still the empire expanded — Crimea annexed, Poland partitioned, the Caucasus and Central Asia drawn in by rivalry with Britain in the <strong>Great Game</strong>. But each new conquest deepened the old tensions, driving rulers toward <strong>Russification</strong> that only provoked more resistance.</p>
+    <p>The crisis of serfdom forced the hand of the state. After the Crimean War, Alexander II's <strong>Emancipation Reform of 1861</strong> freed over 23 million serfs — yet redemption payments and the village commune preserved old burdens. Reform changed the form, not the foundation: autocracy survived, discontent festered, and radical ideas spread toward revolution.</p>
+  </div>
+  <figure class="plate wide reveal d2">
+    <div class="frame"><img loading="lazy" alt="Boris Kustodiev, Reading of the Emancipation Manifesto, 1907"
+      src="https://commons.wikimedia.org/wiki/Special:FilePath/Reading%20of%20the%20Manifest%20(Liberation%20of%20peasants)%20-%20Kustodiev,%201907.jpg?width=1100"></div>
+    <figcaption class="placard"><span class="pt">Reading of the Emancipation Manifesto</span><span class="pm">Boris Kustodiev · 1907 · serfs hear of their freedom, 1861</span></figcaption>
+  </figure>
+  <div class="rail reveal d2">
+    <div class="node"><div class="yr">1783</div><div class="ev">Catherine the Great annexes Crimea after victory over the Ottomans.</div></div>
+    <div class="node"><div class="yr">1772–1795</div><div class="ev">The Partitions of Poland bring millions of non-Russians under the crown.</div></div>
+    <div class="node"><div class="yr">1861</div><div class="ev">Alexander II emancipates the serfs — but autocracy endures.</div></div>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section class="finale reveal">
+  <div class="q-label">The Big Question</div>
+  <h2>How did developments from 1450–1750 cause the changes of 1750–1900?</h2>
+  <p class="ans">The autocracy that enabled conquest, and the serfdom that financed it, were never neutral foundations. They overstretched the empire, fractured it along ethnic lines, and chained it to a coerced economy that could not industrialize. What strengthened Russia in one age weakened it in the next — turning the architecture of empire into the engine of reform and, ultimately, revolution.</p>
+</section>
+
+<footer>The Weight of Empire · Russia 1450–1900 · A World History Exhibition</footer>
+
+<script>
+  // animated hero title
+  const t="The Weight of Empire";
+  const h=document.getElementById('heroTitle');
+  [...t].forEach((c,i)=>{
+    const s=document.createElement('span');
+    s.className='l';s.textContent=c===' '?'\u00A0':c;
+    s.style.animationDelay=(.3+i*.045)+'s';
+    h.appendChild(s);
+  });
+
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // graceful image fallback: if a plate image fails, show a labeled placeholder
+  document.querySelectorAll('.frame img').forEach(img=>{
+    img.addEventListener('error',()=>{
+      const f=img.closest('.frame');
+      if(f){f.innerHTML='<div class="loading">Image unavailable — view in browser</div>';}
+    });
+  });
+
+  addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+    bar.style.width=p+'%';
+  });
+</script>
+</body>
+</html>
